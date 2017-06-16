@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Ibericoders</string>
+    <string name="title_activity_main_gastos">Control de Gastos</string>
+    <string name="title_activity_nuevo_gasto">Nuevo Gasto</string>
+    <string name="title_activity_listado_actas">Listado de Actas</string>
+    <string name="title_activity_main">Ibericoders</string>
+    <string name="title_activity_main_actas">Nuevo Acta</string>
+    <string name="title_activity_main_dices">Dados</string>
+
+    <string name="text_view_dices_votes">Dados y votaciones</string>
+    <string name="text_button_dices">Dados</string>
+    <string name="text_button_votes">Votaciones</string>
+    <string name="text_dices">Tira el dado</string>
+    <string name="text_or">o</string>
+    <string name="button_arbitrary">Numero aleatorio</string>
+    <string name="roll_description">Roll the dice, bro.</string>
+    <string name="text_random_number">0</string>
+    <string name="text_votes">Votaciones</string>
+    <string name="text_pick_random"> O elige tu propio rango</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_edit_question">Introduce el tema a votar</string>
+    <string name="text_button_yes">Opción A / Sí</string>
+    <string name="text_button_no">Opción B / NO</string>
+    <string name="text_button_C">Opción C</string>
+    <string name="text_button_D">Opción D</string>
+    <string name="text_button_result">Calcular resultado</string>
+    <string name="text_edit_number_voters">Número de participantes</string>
+    <string name="button_text_share">Compartir el resultado</string>
+    <string name="text_view_topic">Tema de la votación</string>
+    <string name="desctiption_votation_button">Pulsa el botón</string>
+    <string name="text_view_push">Acceder a la votación</string>
+    <string name="text_view_config">Configura la votación</string>
+    <string name="title_activity_config_votation">ConfigVotationActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
