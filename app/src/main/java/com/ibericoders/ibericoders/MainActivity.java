@@ -8,7 +8,7 @@ import android.view.View;
 import com.ibericoders.ibericoders.actas.activities.MainActasActivity;
 import com.ibericoders.ibericoders.controlgastos.activities.MainGastosActivity;
 import com.ibericoders.ibericoders.dados.MainDicesActivity;
-import com.ibericoders.ibericoders.votaciones.ConfigVotationActivity;
+import com.ibericoders.ibericoders.votaciones.activities.ConfigVotationActivity;
 
 public class MainActivity extends AppCompatActivity {
 

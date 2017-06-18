@@ -1,4 +1,4 @@
-package com.ibericoders.ibericoders.votaciones;
+package com.ibericoders.ibericoders.votaciones.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,36 +14,33 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.ibericoders.ibericoders.R;
+import com.ibericoders.ibericoders.votaciones.model.MyValueFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ResultActivity extends AppCompatActivity {
 
-    private int totalParticipants;
     private float votesInA;
     private float votesInB;
     private float votesInC;
     private float votesInD;
     private String topic;
-    private Button buttonShare;
-    private float[] resultVotes;
     private PieChart pieChart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-
-        buttonShare = (Button) findViewById(R.id.buttonToShare);
+        Button buttonShare = (Button) findViewById(R.id.buttonToShare);
         pieChart = (PieChart) findViewById(R.id.pieChart);
 
         //Llamamos a través de la clase Bundle a los datos de la votación.
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            totalParticipants = bundle.getInt("totalParticipants");
+            //int totalParticipants = bundle.getInt("totalParticipants");
             votesInA = bundle.getInt("votesA");
             votesInB = bundle.getInt("votesB");
             votesInC = bundle.getInt("votesC");
@@ -52,7 +49,7 @@ public class ResultActivity extends AppCompatActivity {
         }
 
         //creamos un array con los resultados para poder utilizarlo en la tabla.
-        resultVotes = new float[4];
+        float[] resultVotes = new float[4];
         resultVotes[0] = votesInA;
         resultVotes[1] = votesInB;
         resultVotes[2] = votesInC;
@@ -71,17 +68,17 @@ public class ResultActivity extends AppCompatActivity {
         PieData data = new PieData(set);
         pieChart.setData(data);
         pieChart.setCenterText(topic);
-        set.setSliceSpace(3f);
-        set.setSelectionShift(5f);
+        set.setSliceSpace(7f);
+        set.setSelectionShift(7f);
         pieChart.invalidate(); // refresh
 
 
-        // sets colors for the dataset, resolution of the resource name to a "real" color is done internally
+        // seteamos los colores del grafico y el color del texto, entre otros parámetros.
         set.setColors(new int[]{R.color.colorPrimaryLight, R.color.colorButtonNo, R.color.colorButtonC, R.color.colorButtonD}, this);
-        data.setValueFormatter(new PercentFormatter());
-        data.setValueTextSize(12f);
-        data.setValueTextColor(Color.WHITE);
-
+        data.setValueFormatter(new MyValueFormatter());
+        data.setValueTextSize(15f);
+        data.setValueTextColor(Color.BLACK);
+        pieChart.setEntryLabelColor(Color.BLACK);
         buttonShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +86,8 @@ public class ResultActivity extends AppCompatActivity {
                 sendEmail();
             }
         });
+
+
     }
 
     //método para envíar el email al pulsar el botón de resultado
@@ -106,14 +105,14 @@ public class ResultActivity extends AppCompatActivity {
         emailIntent.setType("application/image");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Resultado de la votación '" + topic+"'");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "El resultado de la votación sobre el asunto '" + topic + "' se encuentra en su galería de imágenes");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Resultado de la votación '" + topic + "'");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "El resultado de la votación sobre el asunto '" + topic + "' se encuentra en su galería de imágenes, adjúntelo si lo desea.");
         //emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///mnt/sdcard/Result" + topic + ".jpeg"));
 
         try {
             startActivity(Intent.createChooser(emailIntent, "Send mail..."));
             finish();
-            Log.i("Finished sending email.", "");
+            Log.i("Finished sending email", "");
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(ResultActivity.this,
                     "There is no email client installed.", Toast.LENGTH_SHORT).show();

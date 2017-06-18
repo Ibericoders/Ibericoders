@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ibericoders.ibericoders.votaciones.ResultActivity"
+    tools:context="com.ibericoders.ibericoders.votaciones.activities.ResultActivity"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <com.github.mikephil.charting.charts.PieChart

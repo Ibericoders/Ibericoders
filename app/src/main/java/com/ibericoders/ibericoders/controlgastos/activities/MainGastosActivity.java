@@ -42,7 +42,7 @@ import com.ibericoders.ibericoders.controlgastos.model.Gasto;
 import com.ibericoders.ibericoders.controlgastos.model.GestionGastos;
 import com.ibericoders.ibericoders.controlgastos.model.ListadoAdapter;
 import com.ibericoders.ibericoders.dados.MainDicesActivity;
-import com.ibericoders.ibericoders.votaciones.ConfigVotationActivity;
+import com.ibericoders.ibericoders.votaciones.activities.ConfigVotationActivity;
 
 import java.io.BufferedReader;
 import java.io.File;
