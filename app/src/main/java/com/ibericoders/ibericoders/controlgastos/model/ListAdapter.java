@@ -11,28 +11,24 @@ import com.ibericoders.ibericoders.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by Jorge on 15/06/2017.
- */
 
-public class ListadoAdapter extends BaseAdapter {
+public class ListAdapter extends BaseAdapter {
 
-    private ArrayList<Gasto> datos;
+    private ArrayList<Expense> data;
     private LayoutInflater lf;
 
-    public ListadoAdapter(Context ctx, ArrayList<Gasto> datos){
-        Context ctx1 = ctx;
-        this.datos=datos;
+    public ListAdapter(Context ctx, ArrayList<Expense> data){
+        this.data = data;
         lf=LayoutInflater.from(ctx);
     }
     @Override
     public int getCount() {
-        return datos.size();
+        return data.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return datos.get(position);
+        return data.get(position);
     }
 
     @Override
@@ -45,25 +41,25 @@ public class ListadoAdapter extends BaseAdapter {
         //Generamos un objeto View a partir de la plantilla creada para la fila.
         convertView=lf.inflate(R.layout.tarjeta_gasto,null);
 
-        //Nombre Gasto
-        TextView tvNombre=(TextView)convertView.findViewById(R.id.tv_nombreGasto);
-        tvNombre.setText(datos.get(position).getNombre());
+        //Nombre Expense
+        TextView tvName=(TextView)convertView.findViewById(R.id.tv_nombreGasto);
+        tvName.setText(data.get(position).getName());
 
-        //Descripcion Gasto
+        //Descripcion Expense
         TextView tvDescripcion=(TextView)convertView.findViewById(R.id.tv_descripcionGasto);
-        tvDescripcion.setText(datos.get(position).getDescripcion());
+        tvDescripcion.setText(data.get(position).getDescription());
 
-        //Cantidad Gasto
+        //Cantidad Expense
         TextView tvCantidad=(TextView)convertView.findViewById(R.id.tv_cantidadGasto);
-        tvCantidad.setText(String.valueOf(datos.get(position).getCantidad()));
+        tvCantidad.setText(String.valueOf(data.get(position).getAmount()));
 
-        //Fecha Gasto
+        //Fecha Expense
         TextView tvFecha=(TextView)convertView.findViewById(R.id.tv_fechaGasto);
-        tvFecha.setText(datos.get(position).getFecha());
+        tvFecha.setText(data.get(position).getDate());
 
-        //Categoría Gasto
+        //Categoría Expense
         TextView tvCat=(TextView)convertView.findViewById(R.id.tv_categoriaGasto);
-        tvCat.setText(datos.get(position).getCategoria());
+        tvCat.setText(data.get(position).getCategory());
 
         //Devolver el view de la fila
         return convertView;

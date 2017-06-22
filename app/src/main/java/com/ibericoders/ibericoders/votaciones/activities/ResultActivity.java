@@ -1,6 +1,7 @@
 package com.ibericoders.ibericoders.votaciones.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -89,6 +90,24 @@ public class ResultActivity extends AppCompatActivity {
 
 
     }
+
+   /* @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 10: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+
+                } else {
+
+                    Toast.makeText(this,"El acceso al almacenamiento externo es necesario para usar esta función.",Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }*/
 
     //método para envíar el email al pulsar el botón de resultado
     //en principio, al ser una App interna, la dirección será predefinida

@@ -16,31 +16,30 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ibericoders.ibericoders.R;
-import com.ibericoders.ibericoders.controlgastos.model.Gasto;
-import com.ibericoders.ibericoders.controlgastos.model.GestionGastos;
+import com.ibericoders.ibericoders.controlgastos.model.Expense;
+import com.ibericoders.ibericoders.controlgastos.model.ExpensesData;
 
-public class NuevoGastoActivity extends AppCompatActivity {
+public class NewExpensesActivity extends AppCompatActivity {
 
-    EditText nombre,descripcion,cantidad,fecha;
-    Spinner sp;
-    GestionGastos ggastos;
-    String cat=null;
+    private EditText name, description, amount, date;
+    private ExpensesData expensesData;
+    private String cat=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_gasto);
 
-        ggastos=new GestionGastos(this);
+        expensesData =new ExpensesData(this);
 
         //Referencias a objetos
-        nombre=(EditText)this.findViewById(R.id.edt_nombreGasto);
-        descripcion=(EditText)this.findViewById(R.id.edt_descripcionGasto);
-        cantidad=(EditText)this.findViewById(R.id.edt_cantidadGasto);
-        fecha=(EditText)this.findViewById(R.id.edt_fechaGasto);
-        sp=(Spinner)this.findViewById(R.id.sp_categoriaGasto);
+        name =(EditText)this.findViewById(R.id.edt_nombreGasto);
+        description =(EditText)this.findViewById(R.id.edt_descripcionGasto);
+        amount =(EditText)this.findViewById(R.id.edt_cantidadGasto);
+        date =(EditText)this.findViewById(R.id.edt_fechaGasto);
+        Spinner sp = (Spinner) this.findViewById(R.id.sp_categoriaGasto);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new String[]{"Seleccione categoría...","Cat1","Cat2","Cat3","Cat4","Cat5"});
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new String[]{"Seleccione categoría...", "Cat1", "Cat2", "Cat3", "Cat4", "Cat5"});
         sp.setAdapter(adapter);
 
         sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -56,46 +55,46 @@ public class NuevoGastoActivity extends AppCompatActivity {
 
         });
 
-        fecha.setOnClickListener(new View.OnClickListener() {
+        date.setOnClickListener(new View.OnClickListener() {
             @Override
             @TargetApi(24)
             public void onClick(View v) {
 
                 Calendar cal=Calendar.getInstance();
-                //Generar cuadro de dialogo de fecha
-                DatePickerDialog dgfecha=new DatePickerDialog(NuevoGastoActivity.this, new DatePickerDialog.OnDateSetListener() {
+                //Generar cuadro de dialogo de date
+                DatePickerDialog dgDate=new DatePickerDialog(NewExpensesActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        //Cada vez que se seleccione una fecha se genera una cadena con los datos de la feccha seleccionada.
+                        //Cada vez que se seleccione una date se genera una cadena con los datos de la feccha seleccionada.
                         String fechaselec=view.getDayOfMonth()+"/"+(view.getMonth()+1)+"/"+view.getYear();
-                        //Volcamos la cadena de fecha en el TextView
-                        fecha.setText(fechaselec);
+                        //Volcamos la cadena de date en el TextView
+                        date.setText(fechaselec);
                     }
                 }, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH));
 
-                dgfecha.show();
+                dgDate.show();
             }
         });
     }
 
-    public void cancelar(View v){
+    public void cancel(View v){
         this.finish();
     }
-    public void guardar(View v){
-        if(nombre.getText().length()>0 && descripcion.getText().length()>0 && cantidad.getText().length()>0 && fecha.getText().length()>0 && cat!=null && !cat.equals("Seleccione categoría...")){
-            Gasto g=new Gasto(nombre.getText().toString(),descripcion.getText().toString(),Double.parseDouble(cantidad.getText().toString()),fecha.getText().toString(),cat);
-            if(!ggastos.comprobarGasto(g.getNombre())){
-                ggastos.guardarNuevoGasto(g);
+    public void save(View v){
+        if(name.getText().length()>0 && description.getText().length()>0 && amount.getText().length()>0 && date.getText().length()>0 && cat!=null && !cat.equals("Seleccione categoría...")){
+            Expense g=new Expense(name.getText().toString(), description.getText().toString(),Double.parseDouble(amount.getText().toString()), date.getText().toString(),cat);
+            if(!expensesData.CheckExpense(g.getName())){
+                expensesData.SaveNewExpense(g);
                 Toast.makeText(this, "Gasto introducido correctamente", Toast.LENGTH_LONG).show();
 
                 SharedPreferences prefs=getSharedPreferences("bote", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor=prefs.edit();
                 if(prefs.getString("bote","null").equals("null")){
                     editor.remove("bote");
-                    editor.putString("bote","-"+String.valueOf(g.getCantidad()));
+                    editor.putString("bote","-"+String.valueOf(g.getAmount()));
                 }else{
                     double valorAnterior=Double.parseDouble(prefs.getString("bote",null));
-                    String res=String.valueOf(valorAnterior-g.getCantidad());
+                    String res=String.valueOf(valorAnterior-g.getAmount());
                     editor.remove("bote");
                     editor.putString("bote",res);
                 }

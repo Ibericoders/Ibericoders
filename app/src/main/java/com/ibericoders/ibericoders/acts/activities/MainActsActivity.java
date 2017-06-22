@@ -1,4 +1,4 @@
-package com.ibericoders.ibericoders.actas.activities;
+package com.ibericoders.ibericoders.acts.activities;
 
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
@@ -25,25 +25,25 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.ibericoders.ibericoders.R;
-import com.ibericoders.ibericoders.actas.model.Acta;
-import com.ibericoders.ibericoders.actas.model.GestionDatos;
-import com.ibericoders.ibericoders.controlgastos.activities.MainGastosActivity;
+import com.ibericoders.ibericoders.acts.model.Act;
+import com.ibericoders.ibericoders.acts.model.DataManager;
+import com.ibericoders.ibericoders.controlgastos.activities.MainExpensesActivity;
 import com.ibericoders.ibericoders.dados.MainDicesActivity;
-import com.ibericoders.ibericoders.votaciones.activities.ConfigVotationActivity;
+import com.ibericoders.ibericoders.votaciones.activities.ConfigVotingActivity;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
 
-public class MainActasActivity extends AppCompatActivity
+public class MainActsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView fecha, tvHora, proxima,asistentes;
-    CheckBox alberto, dei, adrian, sergio, silvia, jorge, david;
-    GestionDatos gdatos;
-    EditText titulo, relevo, memoria, puntosF, conclusion, siguiente,
-            compromiso, propuesta, evaluacion;
+    private TextView date, tvHour, nextMeeting, assistants;
+    private CheckBox alberto, dei, adrian, sergio, silvia, jorge, david;
+    private DataManager dataManager;
+    private EditText title, relief, memory, fPoints, conclusions, next,
+            compromise, proposals, evaluation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,20 +63,20 @@ public class MainActasActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //definimos editText
-        titulo=(EditText)this.findViewById(R.id.edtTitulo);
-        relevo=(EditText)this.findViewById(R.id.edtRelevo);
-        memoria=(EditText)this.findViewById(R.id.edtMemoria);
-        puntosF=(EditText)this.findViewById(R.id.edtPuntosF);
-        conclusion=(EditText)this.findViewById(R.id.edtConclusion);
-        siguiente=(EditText)this.findViewById(R.id.edtSiguiente);
-        compromiso=(EditText)this.findViewById(R.id.edtCompromiso);
-        propuesta=(EditText)this.findViewById(R.id.edtPropuesta);
-        evaluacion=(EditText)this.findViewById(R.id.edtEvaluacion);
+        title =(EditText)this.findViewById(R.id.edtTitulo);
+        relief =(EditText)this.findViewById(R.id.edtRelevo);
+        memory =(EditText)this.findViewById(R.id.edtMemoria);
+        fPoints =(EditText)this.findViewById(R.id.edtPuntosF);
+        conclusions =(EditText)this.findViewById(R.id.edtConclusion);
+        next =(EditText)this.findViewById(R.id.edtSiguiente);
+        compromise =(EditText)this.findViewById(R.id.edtCompromiso);
+        proposals =(EditText)this.findViewById(R.id.edtPropuesta);
+        evaluation =(EditText)this.findViewById(R.id.edtEvaluacion);
         //definimos TextView
-        fecha=(TextView) this.findViewById(R.id.tvFecha);
-        tvHora=(TextView)this.findViewById(R.id.tvHora);
-        proxima=(TextView)this.findViewById(R.id. tvProxima);
-        asistentes=(TextView)this.findViewById ( R.id.tvAsistentes );
+        date =(TextView) this.findViewById(R.id.tvFecha);
+        tvHour =(TextView)this.findViewById(R.id.tvHora);
+        nextMeeting =(TextView)this.findViewById(R.id. tvProxima);
+        assistants =(TextView)this.findViewById ( R.id.tvAsistentes );
         //definimos checbox
         alberto = (CheckBox) findViewById ( R.id.Alberto);
         dei = (CheckBox) findViewById ( R.id.Dei );
@@ -85,12 +85,12 @@ public class MainActasActivity extends AppCompatActivity
         silvia = (CheckBox) findViewById ( R.id.silvia );
         jorge= (CheckBox) findViewById ( R.id.jorge );
         david = (CheckBox) findViewById ( R.id.david);
-        //definimos GestionDatos
-        gdatos=new GestionDatos (this);
+        //definimos DataManager
+        dataManager =new DataManager(this);
         //creamos intent para el método onClick de listado en Gestión Datos
         Intent intent=this.getIntent ();
-        if(intent.getSerializableExtra ( "Acta" )!=null){
-            rellenarCampos( (Acta) intent.getSerializableExtra ( "Acta" ) );
+        if(intent.getSerializableExtra ( "Act" )!=null){
+            fillFields( (Act) intent.getSerializableExtra ( "Act" ) );
         }
     }
 
@@ -110,18 +110,18 @@ public class MainActasActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.dados) {
-            Intent intent_dados=new Intent(this, MainDicesActivity.class);
-            this.startActivity(intent_dados);
-        } else if (id == R.id.votaciones) {
-            Intent intent_votaciones=new Intent(this, ConfigVotationActivity.class);
-            this.startActivity(intent_votaciones);
-        } else if (id == R.id.actas) {
-            Intent intent_actas=new Intent(this, MainActasActivity.class);
-            this.startActivity(intent_actas);
-        } else if (id == R.id.gastos) {
-            Intent intent_gastos=new Intent(this, MainGastosActivity.class);
-            this.startActivity(intent_gastos);
+        if (id == R.id.dices) {
+            Intent intent_dices=new Intent(this, MainDicesActivity.class);
+            this.startActivity(intent_dices);
+        } else if (id == R.id.voting) {
+            Intent intent_voting=new Intent(this, ConfigVotingActivity.class);
+            this.startActivity(intent_voting);
+        } else if (id == R.id.acts) {
+            Intent intent_acts=new Intent(this, MainActsActivity.class);
+            this.startActivity(intent_acts);
+        } else if (id == R.id.expenses) {
+            Intent intent_expenses=new Intent(this, MainExpensesActivity.class);
+            this.startActivity(intent_expenses);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -129,57 +129,57 @@ public class MainActasActivity extends AppCompatActivity
         return true;
     }
     //----------------------------Reconoce todos los checked--------------------------------------------
-    public void loguearCheckbox(View v) {
+    public void logCheckbox(View v) {
         String s="Estado: " + (alberto.isChecked () ? "Alberto" : "Alberto No Asiste") + "-" + (dei.isChecked () ? "Dei" : " Dei No Asiste")
                 + "-" + (adrian.isChecked () ? "Adrian" : "Adrian No Asiste") + "-" + (sergio.isChecked () ? "Sergio" : "Sergio No Asiste")
                 + "-" + (silvia.isChecked () ? "Silvia" : "Silvia No Asiste") + "-" + (jorge.isChecked () ? "Jorge" : "Jorge No Asiste")
                 + "-" + (david.isChecked () ? "David" : "David No Asiste");
-        asistentes.setText ( s );
+        assistants.setText ( s );
 
     }
 
 
     //-------------------------Metodo para mostrar el calendario----------------------------------------
-    public void fecha(View v) {
-        //cuando seleccionamos fecha
-        if ( fecha.equals ( v ) ) {
-            fecha.setOnClickListener ( new View.OnClickListener () {
+    public void date(View v) {
+        //cuando seleccionamos date
+        if ( date.equals ( v ) ) {
+            date.setOnClickListener (new View.OnClickListener () {
                 @Override
                 @TargetApi(24)
                 public void onClick(View v) {
 
                     Calendar cal = Calendar.getInstance ();
-                    //Generar cuadro de dialogo de fecha
-                    DatePickerDialog dgfecha = new DatePickerDialog ( MainActasActivity.this, new DatePickerDialog.OnDateSetListener () {
+                    //Generar cuadro de dialogo de date
+                    DatePickerDialog dgDate = new DatePickerDialog ( MainActsActivity.this, new DatePickerDialog.OnDateSetListener () {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                            //Cada vez que se seleccione una fecha se genera una cadena con los datos de la feccha seleccionada.
+                            //Cada vez que se seleccione una date se genera una cadena con los datos de la feccha seleccionada.
                             String fechaselec = view.getDayOfMonth () + "/" + (view.getMonth () + 1) + "/" + view.getYear ();
-                            //Volcamos la cadena de fecha en el TextView
-                            fecha.setText ( fechaselec );
+                            //Volcamos la cadena de date en el TextView
+                            date.setText ( fechaselec );
                         }
                     }, cal.get ( Calendar.YEAR ), cal.get ( Calendar.MONTH ), cal.get ( Calendar.DAY_OF_MONTH ) );
 
-                    dgfecha.show ();
+                    dgDate.show ();
                 }
             } );
         }
-        //Cuando seleccionamos Proxima, introducimos su fecha
-        if ( proxima.equals ( v ) ) {
-            proxima.setOnClickListener ( new View.OnClickListener () {
+        //Cuando seleccionamos Proxima, introducimos su date
+        if ( nextMeeting.equals ( v ) ) {
+            nextMeeting.setOnClickListener (new View.OnClickListener () {
                 @Override
                 @TargetApi(24)
                 public void onClick(View v) {
 
                     Calendar cal = Calendar.getInstance ();
-                    //Generar cuadro de dialogo de fecha
-                    DatePickerDialog dgfecha = new DatePickerDialog ( MainActasActivity.this, new DatePickerDialog.OnDateSetListener () {
+                    //Generar cuadro de dialogo de date
+                    DatePickerDialog dgfecha = new DatePickerDialog ( MainActsActivity.this, new DatePickerDialog.OnDateSetListener () {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                            //Cada vez que se seleccione una fecha se genera una cadena con los datos de la feccha seleccionada.
+                            //Cada vez que se seleccione una date se genera una cadena con los datos de la feccha seleccionada.
                             String fechaselec = view.getDayOfMonth () + "/" + (view.getMonth () + 1) + "/" + view.getYear ();
-                            //Volcamos la cadena de fecha en el TextView
-                            proxima.setText ( fechaselec );
+                            //Volcamos la cadena de date en el TextView
+                            nextMeeting.setText ( fechaselec );
                         }
                     }, cal.get ( Calendar.YEAR ), cal.get ( Calendar.MONTH ), cal.get ( Calendar.DAY_OF_MONTH ) );
 
@@ -199,7 +199,7 @@ public class MainActasActivity extends AppCompatActivity
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 String hora=hourOfDay+":"+minute;
-                tvHora.setText(hora);
+                tvHour.setText(hora);
             }
         },cal.get(Calendar.HOUR),cal.get(Calendar.MINUTE),true);
         tgHora.show();
@@ -207,32 +207,32 @@ public class MainActasActivity extends AppCompatActivity
     }
 //--------------------------------------------------------------------------------------------------
 
-    //------------------------------Metodo que llama a la funcion de guardar----------------------------
+    //------------------------------Metodo que llama a la funcion de save----------------------------
     public void guardar(View v){
-        //creamos objeto donde está guardado el método para guardar
-        gdatos=new GestionDatos ( this );
+        //creamos objeto donde está guardado el método para save
+        dataManager =new DataManager( this );
         //y definimos lo que debe tener
-        if(titulo.getText().length()>0 && fecha.getText().length()>0 && tvHora.getText().length()>0
-                && asistentes.getText().length()>0 && relevo.getText().length()>0 && memoria.getText().length()>0
-                && puntosF.getText().length()>0 && conclusion.getText().length()>0 && siguiente.getText().length()>0
-                && compromiso.getText().length()>0 && propuesta.getText().length()>0 && evaluacion.getText().length()>0
-                && proxima.getText().length()>0 ){
-            Acta ac=new Acta(titulo.getText().toString(), fecha.getText().toString(),
-                    tvHora.getText().toString(), asistentes.getText().toString(),
-                    relevo.getText().toString(),memoria.getText().toString(),
-                    puntosF.getText().toString(),conclusion.getText().toString(),
-                    siguiente.getText().toString(),compromiso.getText().toString(),
-                    propuesta.getText().toString(),evaluacion.getText().toString(),
-                    proxima.getText().toString());
+        if(title.getText().length()>0 && date.getText().length()>0 && tvHour.getText().length()>0
+                && assistants.getText().length()>0 && relief.getText().length()>0 && memory.getText().length()>0
+                && fPoints.getText().length()>0 && conclusions.getText().length()>0 && next.getText().length()>0
+                && compromise.getText().length()>0 && proposals.getText().length()>0 && evaluation.getText().length()>0
+                && nextMeeting.getText().length()>0 ){
+            Act ac=new Act(title.getText().toString(), date.getText().toString(),
+                    tvHour.getText().toString(), assistants.getText().toString(),
+                    relief.getText().toString(), memory.getText().toString(),
+                    fPoints.getText().toString(), conclusions.getText().toString(),
+                    next.getText().toString(), compromise.getText().toString(),
+                    proposals.getText().toString(), evaluation.getText().toString(),
+                    nextMeeting.getText().toString());
 
 
             //comprueba si está repetida el acta
-            if(!gdatos.comprobarDatos(ac.getTitulo())){
-                gdatos.guardarActa(ac);
-                Toast.makeText(this, "Acta guardada correctamente", Toast.LENGTH_LONG).show();
+            if(!dataManager.checkData(ac.getTitle())){
+                dataManager.saveData(ac);
+                Toast.makeText(this, "Act guardada correctamente", Toast.LENGTH_LONG).show();
 
             }else{
-                Toast.makeText(this, "Acta ya introducida", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Act ya introducida", Toast.LENGTH_LONG).show();
             }
         }else{
             Toast.makeText(this, "Es necesario completar todos los campos", Toast.LENGTH_LONG).show();
@@ -240,7 +240,7 @@ public class MainActasActivity extends AppCompatActivity
     }
     //-----------------------------------Enviar mensaje-------------------------------------------------
     public void enviar(View v) {
-        Exportar exp=new Exportar ();
+        Export exp=new Export();
         exp.execute ( "" );
     }
 
@@ -250,7 +250,7 @@ public class MainActasActivity extends AppCompatActivity
     //---------------------------------Metodo que llama a la actividad listado--------------------------
     public void listado(View v){
         //mostramos la actividad del listado
-        Intent intent =new Intent(this,ListadoActasActivity.class);
+        Intent intent =new Intent(this,ListActsActivity.class);
         this.startActivity(intent);
     }
 //--------------------------------------------------------------------------------------------------
@@ -264,15 +264,15 @@ public class MainActasActivity extends AppCompatActivity
 //--------------------------------------------------------------------------------------------------
 
     //------------------------Asyntask enviar-----------------------------------------------------------
-    public class Exportar extends AsyncTask<String,Void,String> {
+    public class Export extends AsyncTask<String,Void,String> {
         @Override
         protected String doInBackground(String... params) {
 
             if( Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-                //Obtener los datos a guardar en el archivo y el nombre del archivo.
-                Acta acta=gdatos.recuperarUnica ();
+                //Obtener los datos a save en el archivo y el nombre del archivo.
+                Act act = dataManager.GetUniqueAct();
 
-                String filename=acta.getTitulo ()+".txt";
+                String filename= act.getTitle()+".txt";
 
                 //Crear la carpeta
                 File folder = new File(Environment.getExternalStoragePublicDirectory(
@@ -286,7 +286,7 @@ public class MainActasActivity extends AppCompatActivity
                 try {
                     FileWriter writer = new FileWriter(file);
 
-                    writer.append(acta.toString()+"\n");
+                    writer.append(act.toString()+"\n");
                     writer.flush();
                     writer.close();
                 }catch(IOException ex){
@@ -306,12 +306,12 @@ public class MainActasActivity extends AppCompatActivity
                 // Añadir el adjunto
                 emailIntent .putExtra(Intent.EXTRA_STREAM, path);
                 // Asunto del email
-                emailIntent .putExtra(Intent.EXTRA_SUBJECT, "Acta Exportada");
+                emailIntent .putExtra(Intent.EXTRA_SUBJECT, "Act Exportada");
                 emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 //Enviar email
                 startActivityForResult(Intent.createChooser(emailIntent , "Enviar email..."),10);
             }else{
-                Toast.makeText(MainActasActivity.this,"La carpeta DOWNLOADS no es accesible.",Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActsActivity.this,"La carpeta DOWNLOADS no es accesible.",Toast.LENGTH_LONG).show();
             }
 
             return null;
@@ -320,26 +320,26 @@ public class MainActasActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Toast.makeText(MainActasActivity.this, "Base de datos exportada correctamente.", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActsActivity.this, "Base de datos exportada correctamente.", Toast.LENGTH_LONG).show();
         }
     }
 //--------------------------------------------------------------------------------------------------
 
-//--------------------------------Asyntask rellenado de Campos--------------------------------------
+//--------------------------------Asynctask rellenado de Campos--------------------------------------
 
-    public void rellenarCampos(Acta ac){
-        titulo.setText(ac.getTitulo ());
-        fecha.setText ( ac.getFecha ());
-        tvHora.setText(ac.getHora ());
-        asistentes.setText ( ac.getAsistentes () );
-        relevo.setText(ac.getRelevos ());
-        memoria.setText(ac.getMemoria ());
-        puntosF.setText(ac.getPuntos ());
-        conclusion.setText(ac.getConclusion ());
-        siguiente.setText(ac.getSiguiente ());
-        compromiso.setText(ac.getCompromisos ());
-        propuesta.setText(ac.getPropuestas ());
-        evaluacion.setText(ac.getEvaluacion ());
+    public void fillFields(Act ac){
+        title.setText(ac.getTitle());
+        date.setText ( ac.getDate());
+        tvHour.setText(ac.getHour());
+        assistants.setText ( ac.getAssitants() );
+        relief.setText(ac.getReliefs());
+        memory.setText(ac.getMemory());
+        fPoints.setText(ac.getPoint());
+        conclusions.setText(ac.getConclusion ());
+        next.setText(ac.getNext());
+        compromise.setText(ac.getCompromise());
+        proposals.setText(ac.getProposals());
+        evaluation.setText(ac.getEvaluation());
 
     }
 //--------------------------------------------------------------------------------------------------

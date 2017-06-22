@@ -1,4 +1,4 @@
-package com.ibericoders.ibericoders.actas.model;
+package com.ibericoders.ibericoders.acts.model;
 
 import android.content.Context;
 
@@ -10,33 +10,32 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-/**
- * Created by Jorge on 15/06/2017.
- */
 
-public class GestionDatos {
-    String ruta = "actas.txt";
-    Context ctx;
+public class DataManager {
+    private String ruta = "acts.txt";
+    private Context ctx;
 
-    public GestionDatos(Context ctx) {
+    public DataManager(Context ctx) {
         this.ctx = ctx;
     }
 
 
 
 
-    //---------------------------------Metodo guardar---------------------------------------------------
-    public void guardarActa(Acta ac) {
+    //---------------------------------Metodo save---------------------------------------------------
+    public void saveData(Act ac) {
+
+        //Guarda los ficheros en un formato determinado.
         try {
-            FileOutputStream fos = ctx.openFileOutput(ruta, Context.MODE_APPEND);
-            PrintStream salida = new PrintStream(fos);
-            salida.println(ac.getTitulo() + "|" + ac.getFecha() + "|" + ac.getHora() + "|" +
-                    ac.getAsistentes() + "|" + ac.getRelevos() + "|" + ac.getMemoria() + "|" + ac.getPuntos()
-                    + "|" + ac.getConclusion() + "|" + ac.getSiguiente() + "|" + ac.getCompromisos() + "|" +
-                    "|" + ac.getPropuestas() + "|" + ac.getEvaluacion() + "|" + ac.getProxima());
+            FileOutputStream fileoutputstream = ctx.openFileOutput(ruta, Context.MODE_APPEND);
+            PrintStream printstream = new PrintStream(fileoutputstream);
+            printstream.println(ac.getTitle() + "|" + ac.getDate() + "|" + ac.getHour() + "|" +
+                    ac.getAssitants() + "|" + ac.getReliefs() + "|" + ac.getMemory() + "|" + ac.getPoint()
+                    + "|" + ac.getConclusion() + "|" + ac.getNext() + "|" + ac.getCompromise() + "|" +
+                    "|" + ac.getProposals() + "|" + ac.getEvaluation() + "|" + ac.getNextMeeting());
 
 
-            salida.close();
+            printstream.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -44,60 +43,60 @@ public class GestionDatos {
 //--------------------------------------------------------------------------------------------------
 
     //-------------------------------Metodo recuperar acta----------------------------------------------
-    public ArrayList<Acta> recuperarActa() {
-        ArrayList<Acta> actas = new ArrayList<>();
+    public ArrayList<Act> getPreviousAct() {
+        ArrayList<Act> acts = new ArrayList<>();
         String s;
         try {
             FileInputStream fis = ctx.openFileInput(ruta);
-            BufferedReader bf = new BufferedReader(new InputStreamReader(fis));
-            while ((s = bf.readLine()) != null) {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fis));
+            while ((s = bufferedReader.readLine()) != null) {
                 String[] datos = s.split("[|]");
-                Acta ac = new Acta(datos[0], datos[1], datos[2], datos[3],
+                Act ac = new Act(datos[0], datos[1], datos[2], datos[3],
                         datos[4], datos[5], datos[6], datos[7], datos[8],
                         datos[9], datos[10], datos[11], datos[12]);
-                actas.add(ac);
+                acts.add(ac);
             }
-            bf.close();
+            bufferedReader.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return actas;
+        return acts;
     }
 //--------------------------------------------------------------------------------------------------
 
 //------------------------------Recuperar un solo acta----------------------------------------------
 
-    public Acta recuperarUnica(){
-        ArrayList<Acta> actas = new ArrayList<>();
+    public Act GetUniqueAct(){
+        ArrayList<Act> acts = new ArrayList<>();
         String s;
         try {
             FileInputStream fis = ctx.openFileInput(ruta);
             BufferedReader bf = new BufferedReader(new InputStreamReader(fis));
             while ((s = bf.readLine()) != null) {
                 String[] datos = s.split("[|]");
-                Acta ac = new Acta(datos[0], datos[1], datos[2], datos[3],
+                Act ac = new Act(datos[0], datos[1], datos[2], datos[3],
                         datos[4], datos[5], datos[6], datos[7], datos[8],
                         datos[9], datos[10], datos[11], datos[12]);
-                actas.add(ac);
+                acts.add(ac);
             }
             bf.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return actas.get(actas.size ()-1);
+        return acts.get(acts.size ()-1);
     }
 
 //--------------------------------------------------------------------------------------------------
 
 //-------------------------------Método comprobación------------------------------------------------
 
-    public boolean comprobarDatos(String titulo){
+    public boolean checkData(String title){
         boolean res = false;
 
-        for(int i = 0;i<recuperarActa().size() ;i++){
+        for(int i = 0; i< getPreviousAct().size() ; i++){
             //obtenemos el titulo de cada acta y lo
             //comparamos con el valor recibido
-            if(recuperarActa().equals(titulo)){
+            if(getPreviousAct().equals(title)){
                 //System.out.println("Repetido");
                 res = true;
             }

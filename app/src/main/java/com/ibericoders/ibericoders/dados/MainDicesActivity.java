@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,9 +20,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.ibericoders.ibericoders.R;
-import com.ibericoders.ibericoders.actas.activities.MainActasActivity;
-import com.ibericoders.ibericoders.controlgastos.activities.MainGastosActivity;
-import com.ibericoders.ibericoders.votaciones.activities.ConfigVotationActivity;
+import com.ibericoders.ibericoders.acts.activities.MainActsActivity;
+import com.ibericoders.ibericoders.controlgastos.activities.MainExpensesActivity;
+import com.ibericoders.ibericoders.votaciones.activities.ConfigVotingActivity;
 
 import java.util.Random;
 import java.util.Timer;
@@ -30,9 +31,9 @@ import java.util.TimerTask;
 public class MainDicesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ImageView imageViewDice;
-    private TextView textViewRandom;
-    private TextView textViewMaximum;
+    private ImageView imageViewDice;    //ImageView en el que se va a posicionar el dado.
+    private TextView textViewRandom;    //TextView sobre el que se vuelca el resultado aleatorio
+    private TextView textViewMaximum;   //TextView en el que el usuario puede ver el numero máximo que marca.
     private Random random;              //Genera numeros al azar.
     private Handler handler;            //Manejador para el TimerTask
     private Timer timer;                //Usado para darle feedback al usuario.
@@ -56,7 +57,7 @@ public class MainDicesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //INSTANCIAMOS LOS ELEMENTOS DE LA UI Y OTROS.
+        //Instanciamos los elementos de la UI y seteamos algunos de sus valores.
 
         Button buttonArbitrary = (Button) findViewById(R.id.buttonArbitrary);
         imageViewDice = (ImageView) findViewById(R.id.imageViewDice);
@@ -64,7 +65,7 @@ public class MainDicesActivity extends AppCompatActivity
         textViewMaximum = (TextView) findViewById(R.id.textViewMaximum); //TextView que marca el maximo establecido
         SeekBar seekBarMaximum = (SeekBar) findViewById(R.id.seekBarMaximum);
         int maxSeekBar = 20;
-        seekBarMaximum.setMax(maxSeekBar); //El máximo es 20.
+        seekBarMaximum.setMax(maxSeekBar); //El máximo numero aleatorio es 20.
         textViewMaximum.setText(maxNumberEstablished + "");
         random = new Random();
         rolling = false;
@@ -140,6 +141,9 @@ public class MainDicesActivity extends AppCompatActivity
             //NEXTINT VA DE 0 A 5, POR TANTO, +1.
             switch (random.nextInt(6) + 1) {
                 case 1:
+                    //Mostramos la imagen correspondiente en cada uno de los 6
+                    // casos posibles
+
                     imageViewDice.setImageResource(R.drawable.one);
                     break;
                 case 2:
@@ -181,22 +185,23 @@ public class MainDicesActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        // Maneja los clicks en los items del Navigation View.
         int id = item.getItemId();
 
-        if (id == R.id.dados) {
-            Intent intent_dados=new Intent(this, MainDicesActivity.class);
-            this.startActivity(intent_dados);
-        } else if (id == R.id.votaciones) {
-            Intent intent_votaciones=new Intent(this, ConfigVotationActivity.class);
-            this.startActivity(intent_votaciones);
-        } else if (id == R.id.actas) {
-            Intent intent_actas=new Intent(this, MainActasActivity.class);
-            this.startActivity(intent_actas);
-        } else if (id == R.id.gastos) {
-            Intent intent_gastos=new Intent(this, MainGastosActivity.class);
-            this.startActivity(intent_gastos);
+        if (id == R.id.dices) {
+            Intent intent_dices=new Intent(this, MainDicesActivity.class);
+            this.startActivity(intent_dices);
+        } else if (id == R.id.voting) {
+            Intent intent_voting=new Intent(this, ConfigVotingActivity.class);
+            this.startActivity(intent_voting);
+        } else if (id == R.id.acts) {
+            Intent intent_acts=new Intent(this, MainActsActivity.class);
+            this.startActivity(intent_acts);
+        } else if (id == R.id.expenses) {
+            Intent intent_expenses=new Intent(this, MainExpensesActivity.class);
+            this.startActivity(intent_expenses);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

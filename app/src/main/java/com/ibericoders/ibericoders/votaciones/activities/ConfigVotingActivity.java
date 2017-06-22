@@ -3,6 +3,7 @@ package com.ibericoders.ibericoders.votaciones.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,11 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ibericoders.ibericoders.R;
-import com.ibericoders.ibericoders.actas.activities.MainActasActivity;
-import com.ibericoders.ibericoders.controlgastos.activities.MainGastosActivity;
+import com.ibericoders.ibericoders.acts.activities.MainActsActivity;
+import com.ibericoders.ibericoders.controlgastos.activities.MainExpensesActivity;
 import com.ibericoders.ibericoders.dados.MainDicesActivity;
 
-public class ConfigVotationActivity extends AppCompatActivity
+public class ConfigVotingActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private EditText editTextTopic;
@@ -34,7 +35,7 @@ public class ConfigVotationActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_config_votation);
+        setContentView(R.layout.activity_config_voting);
 
         //Creación del menu lateral
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -89,7 +90,7 @@ public class ConfigVotationActivity extends AppCompatActivity
                 if (topic != "") {
                     sendConfig();
                 } else {
-                    Toast.makeText(ConfigVotationActivity.this, "Introduce el tema de la votación primero", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfigVotingActivity.this, "Introduce el tema de la votación primero", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -101,13 +102,13 @@ public class ConfigVotationActivity extends AppCompatActivity
             //si el numero total de participantes, es distinto de 0
             //iniciamos la siguiente activity.
             //cuando se pulsa el botón, se abre una nueva actividad y se manda a traves
-            //del Intent el resultado de las votaciones.
-            Intent intent = new Intent(ConfigVotationActivity.this, VoteActivity.class);
+            //del Intent el resultado de las voting.
+            Intent intent = new Intent(ConfigVotingActivity.this, VoteActivity.class);
             intent.putExtra("totalParticipants", totalParticipants);
             intent.putExtra("topic", topic);
             startActivity(intent);
         } else {
-            Toast.makeText(ConfigVotationActivity.this, "Introduce el número de participantes primero", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigVotingActivity.this, "Introduce el número de participantes primero", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -123,22 +124,22 @@ public class ConfigVotationActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.dados) {
-            Intent intent_dados=new Intent(this, MainDicesActivity.class);
-            this.startActivity(intent_dados);
-        } else if (id == R.id.votaciones) {
-            Intent intent_votaciones=new Intent(this, ConfigVotationActivity.class);
-            this.startActivity(intent_votaciones);
-        } else if (id == R.id.actas) {
-            Intent intent_actas=new Intent(this, MainActasActivity.class);
-            this.startActivity(intent_actas);
-        } else if (id == R.id.gastos) {
-            Intent intent_gastos=new Intent(this, MainGastosActivity.class);
-            this.startActivity(intent_gastos);
+        if (id == R.id.dices) {
+            Intent intent_dices=new Intent(this, MainDicesActivity.class);
+            this.startActivity(intent_dices);
+        } else if (id == R.id.voting) {
+            Intent intent_voting=new Intent(this, ConfigVotingActivity.class);
+            this.startActivity(intent_voting);
+        } else if (id == R.id.acts) {
+            Intent intent_acts=new Intent(this, MainActsActivity.class);
+            this.startActivity(intent_acts);
+        } else if (id == R.id.expenses) {
+            Intent intent_expenses=new Intent(this, MainExpensesActivity.class);
+            this.startActivity(intent_expenses);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

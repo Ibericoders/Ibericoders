@@ -1,4 +1,4 @@
-package com.ibericoders.ibericoders.actas.model;
+package com.ibericoders.ibericoders.acts.model;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,15 +11,12 @@ import com.ibericoders.ibericoders.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by Jorge on 15/06/2017.
- */
 
-public class ListadoAdapter extends BaseAdapter {
+public class AdapterList extends BaseAdapter {
     private Context ctx;
-    private ArrayList<Acta> datos;
+    private ArrayList<Act> datos;
     private LayoutInflater lf;
-    public ListadoAdapter(Context ctx, ArrayList<Acta> datos){
+    public AdapterList(Context ctx, ArrayList<Act> datos){
         this.ctx=ctx;
         this.datos=datos;
         lf=LayoutInflater.from(ctx);
@@ -44,9 +41,9 @@ public class ListadoAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView=lf.inflate(R.layout.fila_actas,null);
         TextView tvTitulo=(TextView)convertView.findViewById(R.id.tvFilaTitulo);
-        tvTitulo.setText(datos.get(position).getTitulo());
+        tvTitulo.setText(datos.get(position).getTitle());
         TextView tvFecha=(TextView)convertView.findViewById(R.id.tvFilaFecha);
-        tvFecha.setText(datos.get(position).getFecha());
+        tvFecha.setText(datos.get(position).getDate());
         //dejo la posibilidad de añadir mas filas
 
         return convertView;

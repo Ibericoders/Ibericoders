@@ -9,7 +9,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/app_bar_config_votation"
+        layout="@layout/app_bar_config_voting"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

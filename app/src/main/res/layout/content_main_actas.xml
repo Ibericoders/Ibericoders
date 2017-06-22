@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -20,7 +19,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:clickable="true"
-        android:onClick="guardar"
+        android:onClick="save"
         fab:fabSize="mini"
         fab:srcCompat="@android:drawable/ic_input_add" />
 
@@ -54,7 +53,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:clickable="true"
-        android:onClick="salir"
+        android:onClick="exit"
         fab:elevation="1dp"
         fab:fabSize="normal"
         fab:srcCompat="@android:drawable/ic_delete" />
@@ -96,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="5"
-                    android:hint="Titulo"
+                    android:hint="@string/text_title"
                     android:inputType="textPersonName" />
             </android.support.design.widget.TextInputLayout>
 
@@ -105,8 +104,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:onClick="fecha"
-                android:text="Fecha" />
+                android:onClick="date"
+                android:text="@string/text_date" />
 
             <TextView
                 android:id="@+id/tvHora"
@@ -114,8 +113,8 @@
                 android:layout_height="34dp"
                 android:layout_weight="1"
                 android:ems="5"
-                android:hint="Hora"
-                android:onClick="hora" />
+                android:hint="@string/text_hour"
+                android:onClick="hour" />
 
             <TextView
                 android:id="@+id/tvAsistentes"
@@ -123,8 +122,8 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:ems="5"
-                android:hint="Asistentes"
-                android:onClick="loguearCheckbox" />
+                android:hint="@string/text_assistants"
+                android:onClick="logCheckbox" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -137,21 +136,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Alberto" />
+                    android:text="@string/text_name_alberto" />
 
                 <CheckBox
                     android:id="@+id/Dei"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Dei" />
+                    android:text="@string/text_name_dei" />
 
                 <CheckBox
                     android:id="@+id/Adrian"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Adrián" />
+                    android:text="@string/text_name_adrian" />
 
             </LinearLayout>
 
@@ -166,28 +165,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Sergio" />
+                    android:text="@string/text_name_sergio" />
 
                 <CheckBox
                     android:id="@+id/silvia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Silvia" />
+                    android:text="@string/text_name_silvia" />
 
                 <CheckBox
                     android:id="@+id/jorge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Jorge" />
+                    android:text="@string/text_name_jorge" />
 
                 <CheckBox
                     android:id="@+id/david"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="David" />
+                    android:text="@string/text_name_david" />
             </LinearLayout>
 
             <EditText
@@ -196,7 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="5"
-                android:hint="Relevos"
+                android:hint="@string/text_reliefs"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -205,9 +204,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Memoria"
-                android:inputType="textMultiLine"
-                android:singleLine="false" />
+                android:hint="@string/text_memory"
+                android:inputType="textMultiLine"/>
+                //android:singleLine="false"
 
             <EditText
                 android:id="@+id/edtPuntosF"
@@ -215,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="5"
-                android:hint="Puntos Futuros"
+                android:hint="@string/text_nextpoints"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -224,7 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="5"
-                android:hint="Conclusiones"
+                android:hint="@string/text_conclusions"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -233,7 +232,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="5"
-                android:hint="Siguiente"
+                android:hint="@string/next_meeting"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -242,7 +241,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Compromisos"
+                android:hint="@string/text_compromises"
                 android:inputType="textMultiLine" />
 
             <EditText
@@ -251,7 +250,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="5"
-                android:hint="Propuestas"
+                android:hint="@string/text_proposals"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -260,7 +259,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="5"
-                android:hint="Evaluación"
+                android:hint="@string/text_evaluation"
                 android:inputType="textPersonName" />
 
             <TextView
@@ -268,8 +267,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Proxima reunión"
-                android:onClick="fecha" />
+                android:hint="@string/textNextMeeting"
+                android:onClick="date" />
 
         </LinearLayout>
     </ScrollView>

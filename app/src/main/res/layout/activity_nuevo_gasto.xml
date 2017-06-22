@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ibericoders.ibericoders.controlgastos.activities.NuevoGastoActivity"
+    tools:context="com.ibericoders.ibericoders.controlgastos.activities.NewExpensesActivity"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <Space
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Nombre"
+            android:hint="@string/text_name"
             android:inputType="text"
             android:paddingLeft="16sp"
             android:paddingRight="10sp" />
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Descripción"
+            android:hint="@string/text_description"
             android:inputType="text"
             android:paddingLeft="16sp"
             android:paddingRight="10sp" />
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Cantidad"
+            android:hint="@string/text_amount"
             android:inputType="numberDecimal"
             android:paddingLeft="16sp"
             android:paddingRight="10sp" />
@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Fecha"
+            android:hint="@string/text_date"
             android:inputType="none"
             android:paddingLeft="16sp"
             android:paddingRight="10sp" />
@@ -88,7 +88,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="0dp"
         android:layout_weight="1" />
 
     <Spinner
@@ -114,8 +114,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:elevation="0dp"
-            android:onClick="cancelar"
-            android:text="Cancelar"
+            android:onClick="cancel"
+            android:text="@string/button_cancel"
             android:textColorLink="@color/colorPrimaryDark" />
 
         <Button
@@ -124,8 +124,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="guardar"
-            android:text="Guardar"
+            android:onClick="save"
+            android:text="@string/button_save"
             android:textColorLink="@color/colorPrimaryDark" />
     </LinearLayout>
 

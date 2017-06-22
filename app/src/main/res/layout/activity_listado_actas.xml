@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ibericoders.ibericoders.actas.activities.ListadoActasActivity"
+    tools:context="com.ibericoders.ibericoders.acts.activities.ListActsActivity"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
@@ -24,14 +24,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Titulo" />
+                android:text="@string/text_view_acts_title" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Fecha" />
+                android:text="@string/text_view_date_acts" />
 
         </LinearLayout>
 
@@ -56,11 +56,11 @@
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="salir"
-                android:text="Salir" />
+                android:onClick="exit"
+                android:text="@string/text_button_exit_acts" />
         </LinearLayout>
 
     </LinearLayout>

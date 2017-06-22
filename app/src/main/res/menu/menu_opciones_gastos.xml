@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/filtrar"
-        android:title="Filtrar"
+        android:title="@string/filter"
         android:icon="@drawable/ic_filtrar"/>
     <item
         android:id="@+id/importar"
-        android:title="Importar BBDD"
+        android:title="@string/import_bbdd"
         android:icon="@drawable/ic_importar"/>
     <item
-        android:id="@+id/exportar"
-        android:title="Exportar BBDD"
+        android:id="@+id/export"
+        android:title="@string/export_bbdd"
         android:icon="@drawable/ic_exportar"/>
 </menu>

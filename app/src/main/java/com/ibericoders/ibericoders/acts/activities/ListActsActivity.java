@@ -1,4 +1,4 @@
-package com.ibericoders.ibericoders.actas.activities;
+package com.ibericoders.ibericoders.acts.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,15 +11,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ibericoders.ibericoders.R;
-import com.ibericoders.ibericoders.actas.model.Acta;
-import com.ibericoders.ibericoders.actas.model.GestionDatos;
+import com.ibericoders.ibericoders.acts.model.Act;
+import com.ibericoders.ibericoders.acts.model.DataManager;
 
 import java.util.ArrayList;
 
-public class ListadoActasActivity extends AppCompatActivity {
+public class ListActsActivity extends AppCompatActivity {
 
     private Context ctx;
-    private ArrayList<Acta> actas;
+    private ArrayList<Act> acts;
     private LayoutInflater lf;
 
     @Override
@@ -32,12 +32,12 @@ public class ListadoActasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_actas);
 
-        GestionDatos gdatos=new GestionDatos(this);
+        DataManager data=new DataManager(this);
         ListView lista=(ListView)this.findViewById(R.id.lvActas);
         //creamos adaptador del arraylist
-        ArrayAdapter<Acta> adapter=new ArrayAdapter<Acta>(this,
+        ArrayAdapter<Act> adapter=new ArrayAdapter<Act>(this,
                 android.R.layout.simple_list_item_1,
-                gdatos.recuperarActa());
+                data.getPreviousAct());
         lista.setAdapter(adapter);
 
 
@@ -45,11 +45,11 @@ public class ListadoActasActivity extends AppCompatActivity {
         AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Acta ac = actas.get(position);
+                Act ac = acts.get(position);
                 //abre una nueva ventana recuperando el acta en cuestión
-                Intent intent =new Intent(ListadoActasActivity.this,MainActasActivity.class);
-                intent.putExtra("Acta",ac);
-                ListadoActasActivity.this.startActivity(intent);
+                Intent intent =new Intent(ListActsActivity.this,MainActsActivity.class);
+                intent.putExtra("Act",ac);
+                ListActsActivity.this.startActivity(intent);
 
             }
         };
@@ -57,7 +57,7 @@ public class ListadoActasActivity extends AppCompatActivity {
     }
 
     //--------------------------------Boton Salir-------------------------------------------------------
-    public void salir(View v) {
+    public void exit(View v) {
         this.finish();
     }
 //--------------------------------------------------------------------------------------------------

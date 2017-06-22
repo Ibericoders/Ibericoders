@@ -3,21 +3,21 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/dados"
+            android:id="@+id/dices"
             android:icon="@drawable/ic_cerrar"
-            android:title="Dados" />
+            android:title="@string/dice" />
         <item
-            android:id="@+id/votaciones"
+            android:id="@+id/voting"
             android:icon="@drawable/ic_votaciones"
-            android:title="Votaciones" />
+            android:title="@string/text_voting" />
         <item
-            android:id="@+id/actas"
+            android:id="@+id/acts"
             android:icon="@drawable/ic_actas"
-            android:title="Actas" />
+            android:title="@string/text_act" />
         <item
-            android:id="@+id/gastos"
+            android:id="@+id/expenses"
             android:icon="@drawable/ic_gastos"
-            android:title="Gastos" />
+            android:title="@string/text_expenses" />
     </group>
 
 </menu>

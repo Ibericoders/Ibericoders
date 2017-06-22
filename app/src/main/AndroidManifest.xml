@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".controlgastos.activities.MainGastosActivity"
+            android:name=".controlgastos.activities.MainExpensesActivity"
             android:label="@string/title_activity_main_gastos"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -31,10 +31,10 @@
                 android:value="com.ibericoders.ibericoders.MainActivity" />
         </activity>
         <activity
-            android:name=".controlgastos.activities.NuevoGastoActivity"
+            android:name=".controlgastos.activities.NewExpensesActivity"
             android:label="@string/title_activity_nuevo_gasto" />
         <activity
-            android:name=".actas.activities.MainActasActivity"
+            android:name=".acts.activities.MainActsActivity"
             android:label="@string/title_activity_main_actas"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -43,7 +43,7 @@
                 android:value="com.ibericoders.ibericoders.MainActivity" />
         </activity>
         <activity
-            android:name=".actas.activities.ListadoActasActivity"
+            android:name=".acts.activities.ListActsActivity"
             android:label="@string/title_activity_listado_actas" />
         <activity
             android:name=".dados.MainDicesActivity"
@@ -55,7 +55,7 @@
                 android:value="com.ibericoders.ibericoders.MainActivity" />
         </activity>
         <activity
-            android:name=".votaciones.activities.ConfigVotationActivity"
+            android:name=".votaciones.activities.ConfigVotingActivity"
             android:label="@string/title_activity_config_votation"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

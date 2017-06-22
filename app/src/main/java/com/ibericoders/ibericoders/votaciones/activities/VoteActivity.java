@@ -109,7 +109,7 @@ public class VoteActivity extends AppCompatActivity {
             //si el numero total de votos es igual al de participantes, y distinto de 0
             //iniciamos la siguiente activity.
             //cuando se pulsa el botón, se abre una nueva actividad y se manda a traves
-            //del Intent el resultado de las votaciones.
+            //del Intent el resultado de las voting.
             Intent intent = new Intent(VoteActivity.this, ResultActivity.class);
             intent.putExtra("votesA", votesInOptionA);
             intent.putExtra("votesB", votesInOptionB);

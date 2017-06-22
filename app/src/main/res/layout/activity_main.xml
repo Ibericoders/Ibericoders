@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
@@ -10,7 +9,7 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="80dp"
-        android:id="@+id/espacio"/>
+        android:id="@+id/space"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -21,7 +20,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout1"
-        android:layout_below="@+id/espacio">
+        android:layout_below="@+id/space">
 
         <ImageButton
             android:id="@+id/imageButton4"
@@ -29,7 +28,8 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_weight="1"
-            android:onClick="dados"
+            android:onClick="dices"
+            android:contentDescription="@string/image"
             app:srcCompat="@drawable/dice" />
 
         <ImageButton
@@ -38,7 +38,8 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_weight="1"
-            android:onClick="votaciones"
+            android:onClick="voting"
+            android:contentDescription="@string/image"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/voteactivity" />
 
@@ -61,8 +62,9 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_weight="1"
-            android:onClick="actas"
-            app:srcCompat="@drawable/ic_document" />
+            android:onClick="acts"
+            app:srcCompat="@drawable/ic_document"
+            android:contentDescription="@string/image" />
 
         <ImageButton
             android:id="@+id/imageButton5"
@@ -70,8 +72,9 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_weight="1"
-            android:onClick="gastos"
-            app:srcCompat="@drawable/creditcard" />
+            android:onClick="expenses"
+            app:srcCompat="@drawable/creditcard"
+            android:contentDescription="@string/image" />
     </LinearLayout>
 
 </RelativeLayout>
