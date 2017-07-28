@@ -38,7 +38,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_weight="1"
-            android:onClick="voting"
+            android:onClick="vote"
             android:contentDescription="@string/image"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/voteactivity" />

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent_dices);
     }
 
-    public void voting(View v){
+    public void vote(View v){
         Intent intent_voting=new Intent(this, ConfigVotingActivity.class);
         this.startActivity(intent_voting);
     }
