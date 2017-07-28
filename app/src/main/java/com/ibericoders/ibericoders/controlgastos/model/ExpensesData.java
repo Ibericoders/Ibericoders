@@ -12,13 +12,13 @@ public class ExpensesData {
     private SQLiteDatabase db;
     public ExpensesData(Context ctx){
         //Creación objeto ayudante y obtención de la base de datos
-        Helper helper = new Helper(ctx, "datos", 1);
+        Helper helper = new Helper(ctx, "data", 1);
         db= helper.getWritableDatabase();
     }
 
     public void SaveNewExpense(Expense expense){
         if(!CheckExpense(expense.getName())){
-            String sql="insert into gastos (nombre,descripcion,cantidad,date,categoria) ";
+            String sql="insert into expensesTable (name,description,amount,date,category) ";
             sql+="values ('"+expense.getName()+"','"+expense.getDescription()+"',"+expense.getAmount()+",'"+expense.getDate()+"','"+expense.getCategory()+"')";
             db.execSQL(sql);
         }
@@ -26,7 +26,7 @@ public class ExpensesData {
 
     public boolean CheckExpense(String expenseName){
         boolean res=false;
-        String sql="select * from gastos where nombre='"+expenseName+"'";
+        String sql="select * from expensesTable where name='"+expenseName+"'";
         Cursor c= db.rawQuery(sql,null);
         while(c.moveToNext()){
             res=true;
@@ -36,7 +36,7 @@ public class ExpensesData {
     }
 
     public ArrayList<Expense> getAllExpenses(){
-        String sql="select * from gastos";
+        String sql="select * from expensesTable";
         Cursor c= db.rawQuery(sql,null);
         ArrayList<Expense> expenses =new ArrayList<>();
         while(c.moveToNext()){
@@ -48,7 +48,7 @@ public class ExpensesData {
     }
 
     public ArrayList<Expense> CheckCategoryExpenses(String category){
-        String sql="select * from gastos where categoria='"+category+"'";
+        String sql="select * from expensesTable where category='"+category+"'";
         Cursor c= db.rawQuery(sql,null);
         ArrayList<Expense> expenses =new ArrayList<>();
         while(c.moveToNext()){
@@ -60,7 +60,7 @@ public class ExpensesData {
     }
 
     public Expense getExpense(String name){
-        String sql="select * from gastos where nombre='"+name+"'";
+        String sql="select * from expensesTable where name='"+name+"'";
         Cursor c= db.rawQuery(sql,null);
         Expense g=null;
         while(c.moveToNext()){
@@ -71,7 +71,7 @@ public class ExpensesData {
     }
 
     public void deleteExpense(String name){
-        String sql="delete * from participantes where nombre='"+name+"'";
+        String sql="delete * from expensesTable where name='"+name+"'";
         db.execSQL(sql);
     }
 }
