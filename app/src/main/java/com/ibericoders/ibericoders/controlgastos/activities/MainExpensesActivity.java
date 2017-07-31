@@ -102,9 +102,9 @@ public class MainExpensesActivity extends AppCompatActivity
         //Obtener valor del bote
         SharedPreferences prefs=getSharedPreferences("bote", Context.MODE_PRIVATE);
         if(prefs.getString("bote","null").equals("null")){
-            bote.setText("Valor del bote: 0 €.");
+            bote.setText("0 €");
         }else{
-            bote.setText("Valor del bote: "+prefs.getString("bote",null)+" €.");
+            bote.setText(prefs.getString("bote",null)+" €.");
         }
     }
 
@@ -125,9 +125,9 @@ public class MainExpensesActivity extends AppCompatActivity
 
         SharedPreferences prefs=getSharedPreferences("bote", Context.MODE_PRIVATE);
         if(prefs.getString("bote","null").equals("null")){
-            bote.setText("Valor del bote: 0 €.");
+            bote.setText("0 €");
         }else{
-            bote.setText("Valor del bote: "+prefs.getString("bote",null)+" €.");
+            bote.setText(prefs.getString("bote",null)+" €.");
         }
 
     }
@@ -146,9 +146,9 @@ public class MainExpensesActivity extends AppCompatActivity
 
         SharedPreferences prefs=getSharedPreferences("bote", Context.MODE_PRIVATE);
         if(prefs.getString("bote","null").equals("null")){
-            bote.setText("Valor del bote: 0 €.");
+            bote.setText("0 €");
         }else{
-            bote.setText("Valor del bote: "+prefs.getString("bote",null)+" €.");
+            bote.setText(prefs.getString("bote",null)+" €.");
         }
     }
 
@@ -257,14 +257,14 @@ public class MainExpensesActivity extends AppCompatActivity
                 if(prefs.getString("bote","null").equals("null")){
                     editor.remove("bote");
                     editor.putString("bote",String.valueOf(cantidad));
-                    bote.setText("Valor del bote: "+String.valueOf(cantidad)+" €.");
+                    bote.setText(String.valueOf(cantidad)+" €.");
                 }else{
                     String anterior=prefs.getString("bote",null);
                     double valorAnterior=Double.parseDouble(anterior);
                     String res=String.valueOf(valorAnterior+cantidad);
                     editor.remove("bote");
                     editor.putString("bote",res);
-                    bote.setText("Valor del bote: "+res+" €.");
+                    bote.setText(res+" €.");
                 }
                 editor.apply();
                 dialog.cancel();
