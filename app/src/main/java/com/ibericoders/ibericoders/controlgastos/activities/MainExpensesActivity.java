@@ -105,6 +105,11 @@ public class MainExpensesActivity extends AppCompatActivity
             bote.setText("0 €");
         }else{
             bote.setText(prefs.getString("bote",null)+" €.");
+            /*if(Integer.parseInt(prefs.getString("bote",null)) < 0){
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+            }else{
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark));
+            }*/
         }
     }
 
@@ -128,6 +133,11 @@ public class MainExpensesActivity extends AppCompatActivity
             bote.setText("0 €");
         }else{
             bote.setText(prefs.getString("bote",null)+" €.");
+            /*if(Integer.parseInt(prefs.getString("bote",null)) < 0){
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+            }else{
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark));
+            }*/
         }
 
     }
@@ -149,6 +159,11 @@ public class MainExpensesActivity extends AppCompatActivity
             bote.setText("0 €");
         }else{
             bote.setText(prefs.getString("bote",null)+" €.");
+            /*if(Integer.parseInt(prefs.getString("bote",null)) < 0){
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+            }else{
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark));
+            }*/
         }
     }
 
@@ -265,6 +280,11 @@ public class MainExpensesActivity extends AppCompatActivity
                     editor.remove("bote");
                     editor.putString("bote",res);
                     bote.setText(res+" €.");
+                    /*if(valorAnterior+cantidad < 0){
+                        bote.setTextColor(ContextCompat.getColor(MainExpensesActivity.this, android.R.color.holo_red_dark));
+                    }else{
+                        bote.setTextColor(ContextCompat.getColor(MainExpensesActivity.this, android.R.color.holo_green_dark));
+                    }*/
                 }
                 editor.apply();
                 dialog.cancel();
