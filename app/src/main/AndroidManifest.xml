@@ -32,7 +32,8 @@
         </activity>
         <activity
             android:name=".controlgastos.activities.NewExpensesActivity"
-            android:label="@string/title_activity_nuevo_gasto" />
+            android:label="@string/title_activity_nuevo_gasto"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".acts.activities.MainActsActivity"
             android:label="@string/title_activity_main_actas"
