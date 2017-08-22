@@ -19,9 +19,27 @@ import com.ibericoders.ibericoders.R;
 import com.ibericoders.ibericoders.controlgastos.model.Expense;
 import com.ibericoders.ibericoders.controlgastos.model.ExpensesData;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class NewExpensesActivity extends AppCompatActivity {
 
-    private EditText name, description, amount, date;
+    /*
+     * Atributos de UI
+     */
+    @BindView(R.id.edt_nombreGasto) EditText name;
+
+    @BindView(R.id.edt_descripcionGasto) EditText description;
+
+    @BindView(R.id.edt_cantidadGasto) EditText amount;
+
+    @BindView(R.id.edt_fechaGasto) EditText date;
+
+    @BindView(R.id.sp_categoriaGasto) Spinner sp;
+
+    /*
+     * Atributos de negocio
+     */
     private ExpensesData expensesData;
     private String cat=null;
 
@@ -29,15 +47,10 @@ public class NewExpensesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_gasto);
+        ButterKnife.bind(this);
 
         expensesData =new ExpensesData(this);
 
-        //Referencias a objetos
-        name =(EditText)this.findViewById(R.id.edt_nombreGasto);
-        description =(EditText)this.findViewById(R.id.edt_descripcionGasto);
-        amount =(EditText)this.findViewById(R.id.edt_cantidadGasto);
-        date =(EditText)this.findViewById(R.id.edt_fechaGasto);
-        Spinner sp = (Spinner) this.findViewById(R.id.sp_categoriaGasto);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new String[]{"Seleccione categoría...", "Cat1", "Cat2", "Cat3", "Cat4", "Cat5"});
         sp.setAdapter(adapter);

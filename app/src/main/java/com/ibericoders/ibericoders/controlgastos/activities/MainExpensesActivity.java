@@ -52,16 +52,44 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainExpensesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ListView gastos;
+
+    /*
+     * Atributos de UI
+     */
+    @BindView(R.id.listagastos) private ListView gastos;
+
+    @BindView(R.id.cv_exportar) private CardView exportar;
+
+    @BindView(R.id.edt_emailExportar) private EditText em_exp;
+
+    @BindView(R.id.tv_filtroGasto) private TextView filtro;
+
+    @BindView(R.id.fabPrincipal) private FloatingActionButton fab1;
+
+    @BindView(R.id.fabsub1) private FloatingActionButton fab2;
+
+    @BindView(R.id.fabsub2) private FloatingActionButton fab3;
+
+    @BindView(R.id.tv_fabsub1) private TextView tvfab2;
+
+    @BindView(R.id.tv_fabsub2) private TextView tvfab3;
+
+    @BindView(R.id.tv_valorBote) private TextView bote;
+
+    /*
+     * Atributos de negocio
+     */
+
     ArrayList<Expense> datos;
     ExpensesData ggastos;
-    CardView exportar;
-    EditText em_exp;
-    TextView filtro,tvfab2,tvfab3,bote;
-    FloatingActionButton fab1,fab2,fab3;
+
+
     int CHOOSE_FILE_REQUESTCODE=15;
 
     @Override
@@ -69,6 +97,7 @@ public class MainExpensesActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_gastos);
 
+        ButterKnife.bind(this);
 
         //Creación del menu lateral
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -82,22 +111,15 @@ public class MainExpensesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Referencias a objetos
-        gastos=(ListView)this.findViewById(R.id.listagastos);
-        exportar=(CardView)this.findViewById(R.id.cv_exportar);
-        em_exp=(EditText)this.findViewById(R.id.edt_emailExportar);
-        filtro=(TextView)this.findViewById(R.id.tv_filtroGasto);
+
+        /*
+         * Controlar visibilidad de objetos
+         */
         filtro.setVisibility(View.GONE);
-        fab1=(FloatingActionButton)this.findViewById(R.id.fabPrincipal);
-        fab2=(FloatingActionButton)this.findViewById(R.id.fabsub1);
         fab2.setVisibility(View.GONE);
-        fab3=(FloatingActionButton)this.findViewById(R.id.fabsub2);
         fab3.setVisibility(View.GONE);
-        tvfab2=(TextView)this.findViewById(R.id.tv_fabsub1);
         tvfab2.setVisibility(View.GONE);
-        tvfab3=(TextView)this.findViewById(R.id.tv_fabsub2);
         tvfab3.setVisibility(View.GONE);
-        bote=(TextView)this.findViewById(R.id.tv_valorBote);
 
         //Obtener valor del bote
         SharedPreferences prefs=getSharedPreferences("bote", Context.MODE_PRIVATE);
