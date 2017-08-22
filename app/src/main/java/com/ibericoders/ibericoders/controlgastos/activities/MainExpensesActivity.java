@@ -62,25 +62,25 @@ public class MainExpensesActivity extends AppCompatActivity
     /*
      * Atributos de UI
      */
-    @BindView(R.id.listagastos) private ListView gastos;
+    @BindView(R.id.listagastos) ListView gastos;
 
-    @BindView(R.id.cv_exportar) private CardView exportar;
+    @BindView(R.id.cv_exportar) CardView exportar;
 
-    @BindView(R.id.edt_emailExportar) private EditText em_exp;
+    @BindView(R.id.edt_emailExportar) EditText em_exp;
 
-    @BindView(R.id.tv_filtroGasto) private TextView filtro;
+    @BindView(R.id.tv_filtroGasto) TextView filtro;
 
-    @BindView(R.id.fabPrincipal) private FloatingActionButton fab1;
+    @BindView(R.id.fabPrincipal) FloatingActionButton fab1;
 
-    @BindView(R.id.fabsub1) private FloatingActionButton fab2;
+    @BindView(R.id.fabsub1) FloatingActionButton fab2;
 
-    @BindView(R.id.fabsub2) private FloatingActionButton fab3;
+    @BindView(R.id.fabsub2) FloatingActionButton fab3;
 
-    @BindView(R.id.tv_fabsub1) private TextView tvfab2;
+    @BindView(R.id.tv_fabsub1) TextView tvfab2;
 
-    @BindView(R.id.tv_fabsub2) private TextView tvfab3;
+    @BindView(R.id.tv_fabsub2) TextView tvfab3;
 
-    @BindView(R.id.tv_valorBote) private TextView bote;
+    @BindView(R.id.tv_valorBote) TextView bote;
 
     /*
      * Atributos de negocio

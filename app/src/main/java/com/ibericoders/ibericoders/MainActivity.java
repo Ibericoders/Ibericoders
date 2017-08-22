@@ -19,13 +19,17 @@ import io.fabric.sdk.android.Fabric;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
 
-    @BindView(R.id.imageButton3) private ImageButton vote;
+    @BindView(R.id.imageButton3)
+    ImageButton vote;
 
-    @BindView(R.id.imageButton4) private ImageButton dice;
+    @BindView(R.id.imageButton4)
+    ImageButton dice;
 
-    @BindView(R.id.imageButton5) private ImageButton expenses;
+    @BindView(R.id.imageButton5)
+    ImageButton expenses;
 
-    @BindView(R.id.imageButton6) private ImageButton acts;
+    @BindView(R.id.imageButton6)
+    ImageButton acts;
 
 
     @Override
@@ -34,6 +38,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        /*
+         * Listeners de los botones
+         */
+        vote.setOnClickListener(this);
+        dice.setOnClickListener(this);
+        expenses.setOnClickListener(this);
+        acts.setOnClickListener(this);
 
     }
 
