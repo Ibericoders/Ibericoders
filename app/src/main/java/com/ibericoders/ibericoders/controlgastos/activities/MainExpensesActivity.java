@@ -102,9 +102,14 @@ public class MainExpensesActivity extends AppCompatActivity
         //Obtener valor del bote
         SharedPreferences prefs=getSharedPreferences("bote", Context.MODE_PRIVATE);
         if(prefs.getString("bote","null").equals("null")){
-            bote.setText("Valor del bote: 0 €.");
+            bote.setText("0 €");
         }else{
-            bote.setText("Valor del bote: "+prefs.getString("bote",null)+" €.");
+            bote.setText(prefs.getString("bote",null)+" €.");
+            /*if(Integer.parseInt(prefs.getString("bote",null)) < 0){
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+            }else{
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark));
+            }*/
         }
     }
 
@@ -125,9 +130,14 @@ public class MainExpensesActivity extends AppCompatActivity
 
         SharedPreferences prefs=getSharedPreferences("bote", Context.MODE_PRIVATE);
         if(prefs.getString("bote","null").equals("null")){
-            bote.setText("Valor del bote: 0 €.");
+            bote.setText("0 €");
         }else{
-            bote.setText("Valor del bote: "+prefs.getString("bote",null)+" €.");
+            bote.setText(prefs.getString("bote",null)+" €.");
+            /*if(Integer.parseInt(prefs.getString("bote",null)) < 0){
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+            }else{
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark));
+            }*/
         }
 
     }
@@ -146,9 +156,14 @@ public class MainExpensesActivity extends AppCompatActivity
 
         SharedPreferences prefs=getSharedPreferences("bote", Context.MODE_PRIVATE);
         if(prefs.getString("bote","null").equals("null")){
-            bote.setText("Valor del bote: 0 €.");
+            bote.setText("0 €");
         }else{
-            bote.setText("Valor del bote: "+prefs.getString("bote",null)+" €.");
+            bote.setText(prefs.getString("bote",null)+" €.");
+            /*if(Integer.parseInt(prefs.getString("bote",null)) < 0){
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+            }else{
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark));
+            }*/
         }
     }
 
@@ -257,14 +272,19 @@ public class MainExpensesActivity extends AppCompatActivity
                 if(prefs.getString("bote","null").equals("null")){
                     editor.remove("bote");
                     editor.putString("bote",String.valueOf(cantidad));
-                    bote.setText("Valor del bote: "+String.valueOf(cantidad)+" €.");
+                    bote.setText(String.valueOf(cantidad)+" €.");
                 }else{
                     String anterior=prefs.getString("bote",null);
                     double valorAnterior=Double.parseDouble(anterior);
                     String res=String.valueOf(valorAnterior+cantidad);
                     editor.remove("bote");
                     editor.putString("bote",res);
-                    bote.setText("Valor del bote: "+res+" €.");
+                    bote.setText(res+" €.");
+                    /*if(valorAnterior+cantidad < 0){
+                        bote.setTextColor(ContextCompat.getColor(MainExpensesActivity.this, android.R.color.holo_red_dark));
+                    }else{
+                        bote.setTextColor(ContextCompat.getColor(MainExpensesActivity.this, android.R.color.holo_green_dark));
+                    }*/
                 }
                 editor.apply();
                 dialog.cancel();

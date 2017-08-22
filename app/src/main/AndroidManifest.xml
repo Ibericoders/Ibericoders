@@ -32,7 +32,8 @@
         </activity>
         <activity
             android:name=".controlgastos.activities.NewExpensesActivity"
-            android:label="@string/title_activity_nuevo_gasto" />
+            android:label="@string/title_activity_nuevo_gasto"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".acts.activities.MainActsActivity"
             android:label="@string/title_activity_main_actas"
@@ -65,6 +66,10 @@
         </activity>
         <activity android:name=".votaciones.activities.VoteActivity" />
         <activity android:name=".votaciones.activities.ResultActivity"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="7e7ad77c45539b0cd92018ee7fcb6c54136efdd0" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
