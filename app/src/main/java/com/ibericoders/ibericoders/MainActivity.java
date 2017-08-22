@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
 import com.ibericoders.ibericoders.acts.activities.MainActsActivity;
 import com.ibericoders.ibericoders.controlgastos.activities.MainExpensesActivity;
 import com.ibericoders.ibericoders.dados.MainDicesActivity;
@@ -49,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Método para agrupar OnClick de los diferentes botones. Implementa instancias de Answers para
+     * hacer log de uso de paquetes.
+     */
     @Override
     public void onClick(View view) {
 
@@ -56,24 +62,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.imageButton3:
 
+                Answers.getInstance().logContentView(new ContentViewEvent()
+                        .putContentName("Votaciones")
+                        .putContentType("Package access from Main"));
                 Intent intent_voting=new Intent(this, ConfigVotingActivity.class);
                 this.startActivity(intent_voting);
                 break;
 
             case R.id.imageButton4:
 
+                Answers.getInstance().logContentView(new ContentViewEvent()
+                        .putContentName("Dados")
+                        .putContentType("Package access from Main"));
                 Intent intent_dices=new Intent(this, MainDicesActivity.class);
                 this.startActivity(intent_dices);
                 break;
 
             case R.id.imageButton5:
 
+                Answers.getInstance().logContentView(new ContentViewEvent()
+                        .putContentName("Gastos")
+                        .putContentType("Package access from Main"));
                 Intent intent_expenses=new Intent(this, MainExpensesActivity.class);
                 this.startActivity(intent_expenses);
                 break;
 
             case R.id.imageButton6:
 
+                Answers.getInstance().logContentView(new ContentViewEvent()
+                        .putContentName("Actas")
+                        .putContentType("Package access from Main"));
                 Intent intent_act=new Intent(this, MainActsActivity.class);
                 this.startActivity(intent_act);
                 break;

@@ -37,6 +37,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
 import com.ibericoders.ibericoders.R;
 import com.ibericoders.ibericoders.acts.activities.MainActsActivity;
 import com.ibericoders.ibericoders.controlgastos.model.Expense;
@@ -427,15 +429,38 @@ public class MainExpensesActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.dices) {
+
+            Answers.getInstance().logContentView(new ContentViewEvent()
+            .putContentName("Dados")
+            .putContentType("Package access from menu"));
+
             Intent intent_dices=new Intent(this, MainDicesActivity.class);
             this.startActivity(intent_dices);
+
         } else if (id == R.id.voting) {
+
+            Answers.getInstance().logContentView(new ContentViewEvent()
+                    .putContentName("Votaciones")
+                    .putContentType("Package access from menu"));
+
             Intent intent_voting=new Intent(this, ConfigVotingActivity.class);
             this.startActivity(intent_voting);
+
         } else if (id == R.id.acts) {
+
+            Answers.getInstance().logContentView(new ContentViewEvent()
+                    .putContentName("Actas")
+                    .putContentType("Package access from menu"));
+
             Intent intent_acts=new Intent(this, MainActsActivity.class);
             this.startActivity(intent_acts);
+
         } else if (id == R.id.expenses) {
+
+            Answers.getInstance().logContentView(new ContentViewEvent()
+                    .putContentName("Gastos")
+                    .putContentType("Package access from menu"));
+
             Intent intent_expenses=new Intent(this, MainExpensesActivity.class);
             this.startActivity(intent_expenses);
         }
