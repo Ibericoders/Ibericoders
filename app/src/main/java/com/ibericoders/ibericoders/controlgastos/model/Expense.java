@@ -1,8 +1,10 @@
 package com.ibericoders.ibericoders.controlgastos.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Expense {
+public class Expense implements Parcelable{
 
     private String name;
     private String description;
@@ -62,5 +64,44 @@ public class Expense {
     public String toString() {
         return name +"|"+ description +"|"+ amount +"|"+ date;
     }
+
+
+    /*
+     * Implementación de Parcelable
+     */
+    protected Expense(Parcel in) {
+        name = in.readString();
+        description = in.readString();
+        amount = in.readDouble();
+        date = in.readString();
+        category = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeDouble(amount);
+        dest.writeString(date);
+        dest.writeString(category);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Expense> CREATOR = new Parcelable.Creator<Expense>() {
+        @Override
+        public Expense createFromParcel(Parcel in) {
+            return new Expense(in);
+        }
+
+        @Override
+        public Expense[] newArray(int size) {
+            return new Expense[size];
+        }
+    };
 
 }

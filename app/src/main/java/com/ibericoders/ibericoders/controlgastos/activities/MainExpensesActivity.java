@@ -37,6 +37,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
 import com.ibericoders.ibericoders.R;
 import com.ibericoders.ibericoders.acts.activities.MainActsActivity;
 import com.ibericoders.ibericoders.controlgastos.model.Expense;
@@ -52,16 +54,44 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainExpensesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ListView gastos;
+
+    /*
+     * Atributos de UI
+     */
+    @BindView(R.id.listagastos) ListView gastos;
+
+    @BindView(R.id.cv_exportar) CardView exportar;
+
+    @BindView(R.id.edt_emailExportar) EditText em_exp;
+
+    @BindView(R.id.tv_filtroGasto) TextView filtro;
+
+    @BindView(R.id.fabPrincipal) FloatingActionButton fab1;
+
+    @BindView(R.id.fabsub1) FloatingActionButton fab2;
+
+    @BindView(R.id.fabsub2) FloatingActionButton fab3;
+
+    @BindView(R.id.tv_fabsub1) TextView tvfab2;
+
+    @BindView(R.id.tv_fabsub2) TextView tvfab3;
+
+    @BindView(R.id.tv_valorBote) TextView bote;
+
+    /*
+     * Atributos de negocio
+     */
+
     ArrayList<Expense> datos;
     ExpensesData ggastos;
-    CardView exportar;
-    EditText em_exp;
-    TextView filtro,tvfab2,tvfab3,bote;
-    FloatingActionButton fab1,fab2,fab3;
+
+
     int CHOOSE_FILE_REQUESTCODE=15;
 
     @Override
@@ -69,6 +99,7 @@ public class MainExpensesActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_gastos);
 
+        ButterKnife.bind(this);
 
         //Creación del menu lateral
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -82,29 +113,27 @@ public class MainExpensesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Referencias a objetos
-        gastos=(ListView)this.findViewById(R.id.listagastos);
-        exportar=(CardView)this.findViewById(R.id.cv_exportar);
-        em_exp=(EditText)this.findViewById(R.id.edt_emailExportar);
-        filtro=(TextView)this.findViewById(R.id.tv_filtroGasto);
+
+        /*
+         * Controlar visibilidad de objetos
+         */
         filtro.setVisibility(View.GONE);
-        fab1=(FloatingActionButton)this.findViewById(R.id.fabPrincipal);
-        fab2=(FloatingActionButton)this.findViewById(R.id.fabsub1);
         fab2.setVisibility(View.GONE);
-        fab3=(FloatingActionButton)this.findViewById(R.id.fabsub2);
         fab3.setVisibility(View.GONE);
-        tvfab2=(TextView)this.findViewById(R.id.tv_fabsub1);
         tvfab2.setVisibility(View.GONE);
-        tvfab3=(TextView)this.findViewById(R.id.tv_fabsub2);
         tvfab3.setVisibility(View.GONE);
-        bote=(TextView)this.findViewById(R.id.tv_valorBote);
 
         //Obtener valor del bote
         SharedPreferences prefs=getSharedPreferences("bote", Context.MODE_PRIVATE);
         if(prefs.getString("bote","null").equals("null")){
-            bote.setText("Valor del bote: 0 €.");
+            bote.setText("0 €");
         }else{
-            bote.setText("Valor del bote: "+prefs.getString("bote",null)+" €.");
+            bote.setText(prefs.getString("bote",null)+" €.");
+            /*if(Integer.parseInt(prefs.getString("bote",null)) < 0){
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+            }else{
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark));
+            }*/
         }
     }
 
@@ -125,9 +154,14 @@ public class MainExpensesActivity extends AppCompatActivity
 
         SharedPreferences prefs=getSharedPreferences("bote", Context.MODE_PRIVATE);
         if(prefs.getString("bote","null").equals("null")){
-            bote.setText("Valor del bote: 0 €.");
+            bote.setText("0 €");
         }else{
-            bote.setText("Valor del bote: "+prefs.getString("bote",null)+" €.");
+            bote.setText(prefs.getString("bote",null)+" €.");
+            /*if(Integer.parseInt(prefs.getString("bote",null)) < 0){
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+            }else{
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark));
+            }*/
         }
 
     }
@@ -146,9 +180,14 @@ public class MainExpensesActivity extends AppCompatActivity
 
         SharedPreferences prefs=getSharedPreferences("bote", Context.MODE_PRIVATE);
         if(prefs.getString("bote","null").equals("null")){
-            bote.setText("Valor del bote: 0 €.");
+            bote.setText("0 €");
         }else{
-            bote.setText("Valor del bote: "+prefs.getString("bote",null)+" €.");
+            bote.setText(prefs.getString("bote",null)+" €.");
+            /*if(Integer.parseInt(prefs.getString("bote",null)) < 0){
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+            }else{
+                bote.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark));
+            }*/
         }
     }
 
@@ -257,14 +296,19 @@ public class MainExpensesActivity extends AppCompatActivity
                 if(prefs.getString("bote","null").equals("null")){
                     editor.remove("bote");
                     editor.putString("bote",String.valueOf(cantidad));
-                    bote.setText("Valor del bote: "+String.valueOf(cantidad)+" €.");
+                    bote.setText(String.valueOf(cantidad)+" €.");
                 }else{
                     String anterior=prefs.getString("bote",null);
                     double valorAnterior=Double.parseDouble(anterior);
                     String res=String.valueOf(valorAnterior+cantidad);
                     editor.remove("bote");
                     editor.putString("bote",res);
-                    bote.setText("Valor del bote: "+res+" €.");
+                    bote.setText(res+" €.");
+                    /*if(valorAnterior+cantidad < 0){
+                        bote.setTextColor(ContextCompat.getColor(MainExpensesActivity.this, android.R.color.holo_red_dark));
+                    }else{
+                        bote.setTextColor(ContextCompat.getColor(MainExpensesActivity.this, android.R.color.holo_green_dark));
+                    }*/
                 }
                 editor.apply();
                 dialog.cancel();
@@ -385,15 +429,38 @@ public class MainExpensesActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.dices) {
+
+            Answers.getInstance().logContentView(new ContentViewEvent()
+            .putContentName("Dados")
+            .putContentType("Package access from menu"));
+
             Intent intent_dices=new Intent(this, MainDicesActivity.class);
             this.startActivity(intent_dices);
+
         } else if (id == R.id.voting) {
+
+            Answers.getInstance().logContentView(new ContentViewEvent()
+                    .putContentName("Votaciones")
+                    .putContentType("Package access from menu"));
+
             Intent intent_voting=new Intent(this, ConfigVotingActivity.class);
             this.startActivity(intent_voting);
+
         } else if (id == R.id.acts) {
+
+            Answers.getInstance().logContentView(new ContentViewEvent()
+                    .putContentName("Actas")
+                    .putContentType("Package access from menu"));
+
             Intent intent_acts=new Intent(this, MainActsActivity.class);
             this.startActivity(intent_acts);
+
         } else if (id == R.id.expenses) {
+
+            Answers.getInstance().logContentView(new ContentViewEvent()
+                    .putContentName("Gastos")
+                    .putContentType("Package access from menu"));
+
             Intent intent_expenses=new Intent(this, MainExpensesActivity.class);
             this.startActivity(intent_expenses);
         }
