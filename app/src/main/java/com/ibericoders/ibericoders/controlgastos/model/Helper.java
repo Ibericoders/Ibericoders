@@ -21,8 +21,8 @@ public class Helper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Se le llama para construir las tablas de la base de datos.
         //Instruccion SQL de creacion de la tabla de expenses.
-        String sqlCrearTabla1="create table expenses (_id integer primary key autoincrement,";
-        sqlCrearTabla1+="nombre text,descripcion text,cantidad double,date text,categoria text)";
+        String sqlCrearTabla1="create table expensesTable (_id integer primary key autoincrement,";
+        sqlCrearTabla1+="name text,description text,amount double,date text,category text)";
         //Ejecutar la instrucción 1.
         db.execSQL(sqlCrearTabla1);
     }

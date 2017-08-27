@@ -30,7 +30,7 @@ public class ListActsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listado_actas);
+        setContentView(R.layout.activity_list_acts);
 
         DataManager data=new DataManager(this);
         ListView lista=(ListView)this.findViewById(R.id.lvActas);

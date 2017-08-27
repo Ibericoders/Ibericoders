@@ -57,7 +57,7 @@
         </activity>
         <activity
             android:name=".votaciones.activities.ConfigVotingActivity"
-            android:label="@string/title_activity_config_votation"
+            android:label="@string/text_votes"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
